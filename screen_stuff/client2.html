@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>screenjax</title>
+
+<link rel="stylesheet" href="/css/style.css" type="text/css" />
+
+<script src="/js/prototype.js" language="JavaScript" type="text/javascript"></script>
+
+<script type="text/javascript" language="JavaScript">
+
+function checkZip() {
+	if($F('zip').length == 5) {
+		var url = 'http://pl129.pairlitesite.com/tests/CFDAB5B0-1083-11DC-8F25-82222BC873A6/dump.cgi';
+		var params = 'zip=' + $F('zip');
+		var ajax = new Ajax.Updater(
+			{success: 'zipResult'},
+		url,
+			{method: 'get', parameters: params, onFailure: reportError});
+	}
+}
+function reportError(request) {
+$F('zipResult') = "Error";
+}
+
+</script>
+</head>
+
+<body>
+
+my menu
+<br>
+<hr>
+<IFRAME SRC="iframe.html" >
+If you can see this, your browser doesn't 
+understand IFRAME.  However, we'll still 
+<A HREF="hello.html">link</A> 
+you to the file.
+</IFRAME>
+<hr>
+
+<form name="formy">
+<label for="zip">zip:</label>
+<input type="text" name="zip" id="zip" onkeyup="checkZip();" />
+<div id="zipResult"></div>
+</form>
+<br>
+<applet archive="mindterm.jar" code=com.mindbright.application.MindTerm.class width=1000 height=600>
+<param name=usrname value="">
+<PARAM VALUE="pl129.pairlitesite.com" NAME="server">
+<PARAM VALUE="pl129" NAME="username">
+<param name=te value="xterm">
+<param name=rows value="50">
+<param name=cols value="120">
+<param name=port value="22">
+
+<param name=cipher value="3des">
+<param name=sepframe value="false">
+<param name=idhost value="false">
+</applet> 
+<br>
+bottom
+
+</body>
+</html>
+

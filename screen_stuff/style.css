@@ -1,0 +1,6 @@
+body { font-family: verdana; }
+#zipResult { position:absolute; margin-left: 20px; display:inline; color: grey; font-size:large; }
+.goodzip { background: url("greencheck.gif") no-repeat left; padding-left:20px; }
+.badzip { color: red; }
+input { font-size: large; }
+label { font-size:large; color: silver; }
