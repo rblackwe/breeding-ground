@@ -1,0 +1,8 @@
+#!/usr/bin/env perl
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+
+# This is never current because the whole point of this fixture is to
+# wipe the existing DBMS clean
+exit 1;

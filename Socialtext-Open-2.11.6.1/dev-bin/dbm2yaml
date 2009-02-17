@@ -1,0 +1,19 @@
+#!/usr/bin/env perl
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+use strict;
+use DB_File;
+use YAML;
+
+
+{ no warnings 'once';
+$YAML::UseVersion = 0;
+}
+
+my $file = shift
+  or die "usage dbm2yaml <dbm-file-path>\n";
+my %file;
+tie %file, 'DB_File', $file, O_RDONLY;
+print Dump \%file;
+untie %file;

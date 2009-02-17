@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>screenjax</title>
+
+<!--CSS-->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/fonts/fonts-min.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.2.2/build/menu/assets/menu.css">
+
+<!-- Dependencies --> 
+<script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/yahoo-dom-event/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/container/container_core-min.js"></script>
+
+<!-- Source File -->
+<script type="text/javascript" src="http://yui.yahooapis.com/2.2.2/build/menu/menu-min.js"></script>
+
+
+<link rel="stylesheet" href="/css/style.css" type="text/css" />
+
+<script src="/js/prototype.js" language="JavaScript" type="text/javascript"></script>
+
+<script type="text/javascript" language="JavaScript">
+
+function checkZip() {
+	if($F('zip').length == 5) {
+		var url = 'http://pl129.pairlitesite.com/tests/CFDAB5B0-1083-11DC-8F25-82222BC873A6/dump.cgi';
+		var params = 'zip=' + $F('zip');
+		var ajax = new Ajax.Updater(
+			{success: 'zipResult'},
+		url,
+			{method: 'get', parameters: params, onFailure: reportError});
+	}
+}
+function reportError(request) {
+$F('zipResult') = "Error";
+}
+
+</script>
+
+
+
+<script type="text/javascript">
+
+    var oMenu = new YAHOO.widget.Menu("basicmenu");
+    
+    oMenu.addItem(new YAHOO.widget.MenuItem("Yahoo! Mail", { url:"http://mail.yahoo.com"}));
+    oMenu.addItem(new YAHOO.widget.MenuItem("Yahoo! Address Book", { url:"http://addressbook.yahoo.com"}));
+    oMenu.addItem(new YAHOO.widget.MenuItem("Yahoo! Calendar", { url:"http://calendar.yahoo.com"}));
+    oMenu.addItem(new YAHOO.widget.MenuItem("Yahoo! Notepad", { url:"http://notepad.yahoo.com"} ));
+    
+    oMenu.render(document.body);
+    oMenu.show();
+
+</script> 
+
+
+
+
+
+</head>
+
+<body>
+<a href="http://rblackwe.com:8090/">1</a>
+
+my menu iframe 
+<br>
+
+<form name="formy">
+<label for="zip">zip:</label>
+<input type="text" name="zip" id="zip" onkeyup="checkZip();" />
+<div id="zipResult"></div>
+</form>
+<br>
+<br>
+bottom
+
+</body>
+</html>
+

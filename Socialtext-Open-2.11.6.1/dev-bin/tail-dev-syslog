@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+
+LOG=/var/log/nlw.log
+
+tail -f $LOG | perl -ne 's/^[A-Z][a-z][a-z] \d+ //; s/ talc / /; s/ nlw(\[\d+\])/ $1/; print if s/ \[$<\] / /'
+
+
+

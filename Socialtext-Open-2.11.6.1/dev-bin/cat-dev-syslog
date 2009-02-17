@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+
+LOG=/var/log/nlw.log
+
+cat $LOG | grep " \[$UID\] "
+
+
+

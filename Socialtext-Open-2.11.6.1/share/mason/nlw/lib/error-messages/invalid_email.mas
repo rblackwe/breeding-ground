@@ -1,0 +1,7 @@
+<!--
+Copyright (C) 2004-2006 by Socialtext, Inc.
+ -->
+<span class="error">The username "<% $username | h %>" doesn't have an email address. Contact your directory admin.</span>
+<%args>
+$username
+</%args>

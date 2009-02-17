@@ -1,0 +1,101 @@
+<html>
+<head>
+<title>AJAX Zip Checker x </title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script src="/js/prototype.js" language="JavaScript" type="text/javascript"></script>
+<script type="text/javascript" language="JavaScript">
+function checkZip() {
+if($F('zip').length == 5) {
+var url = 'dump.cgi';
+var params = 'zip=' + $F('zip');
+var ajax = new Ajax.Updater(
+{success: 'zipResult'},
+url,
+{method: 'get', parameters: params, onFailure: reportError});
+}
+}
+function reportError(request) {
+$F('zipResult') = "Error";
+}
+
+function checkZip2() {
+if($F('zip').length == 5) {
+var url = 'dump.cgi';
+var params = 'zip=' + $F('zip2');
+var ajax = new Ajax.Updater(
+{success: 'zipResult2'},
+url,
+{method: 'get', parameters: params, onFailure: reportError});
+}
+}
+function reportError(request) {
+$F('zipResult2') = "Error";
+}
+</script>
+</head>
+<body>
+
+<form name="formy">
+<label for="zip">zip:</label>
+<input type="text" name="zip" id="zip" onkeyup="checkZip();" />
+<div id="zipResult"></div>
+</form>
+
+<form name="formx">
+<label for="zip2">zip:</label>
+<input type="text" name="zip2" id="zip2" onkeyup="checkZip2();" />
+<div id="zipResult2"></div>
+</form>
+
+</body>
+</html>
+
+
+
+
+<!--
+
+
+
+
+http://www.petefreitag.com/item/515.cfm 
+<html>
+<head>
+<title>AJAX Zip Checker </title>
+<link rel="stylesheet" href="style.css" type="text/css" />
+<script src="/js/prototype.js" language="JavaScript" type="text/javascript"></script>
+<script type="text/javascript" language="JavaScript">
+function checkZip() {
+
+if($F('zip').length == 5) {
+var url = 'dump.cgi';
+var params = 'zip=' + $F('zip');
+var ajax = new Ajax.Updater(
+{success: 'zipResult'},
+url,
+{method: 'get', parameters: params, onFailure: reportError});
+}
+}
+function reportError(request) {
+$F('zipResult') = "Error";
+}
+</script>
+</head>
+<body>
+
+<form>
+<label for="zip">zip:</label>
+<input type="text" name="zip" id="zip" onkeyup="checkZip();" />
+<div id="zipResult"></div>
+</form>
+
+
+<form>
+<label for="zip">x zip:</label>
+<input type="text" name="zip" id="zip" onkeyup="checkZip();" />
+<div id="zipResult"></div>
+</form>
+
+</body>
+</html>
+-->

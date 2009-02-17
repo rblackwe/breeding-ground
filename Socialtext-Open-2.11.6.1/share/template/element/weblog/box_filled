@@ -1,0 +1,7 @@
+[%#
+Copyright (C) 2004-2006 by Socialtext, Inc.
+ -%]
+[%
+  PROCESS element/weblog/edit_link;
+  self.box_content_filled;
+%]

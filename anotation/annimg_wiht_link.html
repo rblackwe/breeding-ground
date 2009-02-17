@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title>DOM Image Annotation</title>
+<script type="text/javascript" src="annimg.js"></script>
+<link rel="stylesheet" href="annimg.css">
+
+<link rel="stylesheet" href="/include/standard.css">
+
+<link rel="stylesheet" href="/designs/daily/daily.css" title="The Daily Kryogenix">
+<link rel="alternate stylesheet" href="/designs/pretty/pretty.css" title="Pretty">
+
+<link rel="alternate" type="application/rss+xml" title="RSS"
+href="/days/index.rss">
+
+<script language="javascript" type="text/javascript"
+src="/include/searchhi.js"></script>
+
+<meta name="ICBM" content="52.454886, -2.155089">
+<meta name="DC.title" content="as days pass by">
+
+</head>
+<body id="www-kryogenix-org">
+<div class="nav">
+<h2>A site by <a href="/contact.cas">Stuart Langridge</a></h2>
+<ul>
+<li><a href="/">kryogenix.org</a> |</li>
+
+<li><a href="/code/">code</a> |</li>
+<li><a href="/code/browser/">browser experiments</a> |</li>
+</ul>
+
+</div>
+
+<!-- site links -->
+<div class="site">
+    <div class="sitelink" id="sitearchives">
+    <a href="/days/archives.html"><em>as days pass by</em> archives
+    <em class="sitelinkwords">scratched tallies on the prison wall</em>
+
+    </a>
+    </div>
+
+    <div class="sitelink" id="sitecode">
+    <a href="/code/">code
+    <em class="sitelinkwords">the most fun you can have on your own</em>
+    </a>
+    </div>
+
+    <div class="sitelink" id="sitewritings">
+
+    <a href="/writings/">writings
+    <em class="sitelinkwords">developing thoughts</em>
+    </a>
+    </div>
+
+    <div class="sitelink" id="sitewritingstech">
+    <a href="/writings/tech/">writings/tech
+    <em class="sitelinkwords">writings on computers on computers</em>
+    </a>
+
+    </div>
+
+    <div class="sitelink" id="siteafe">
+    <a href="/afe/">afe
+    <em class="sitelinkwords">the alt.fan.eddings newsgroup</em>
+    </a>
+    </div>
+</div>
+
+<div id="content">
+
+
+<h1>DOM Image Annotation</h1>
+<p><a href="http://www.flickr.com">Flickr</a>, the online photo 
+organiser application, has some very neat tricks up its sleeve.
+Perhaps the neatest is its process of annotating an image by
+highlighting specific areas of that image and attaching notes
+to them. Very neat. It's done with a combination of DHTML and Flash
+stuff. Gina at scribbling.net has put together an 
+<a href="http://scribbling.net/dhtml-image-annotation">example of how to
+do something similar using DHTML</a>. However, her outlined approach,
+while nice, requires you to build a special rollover image with the
+annotated areas clearly highlighted, and it uses <code>onmouseover</code>
+and <code>onmouseout</code> attributes on lots of bits of the code. While
+this works, it's not really following the 
+<a href="http://www.kryogenix.org/code/browser/aqlists/">principles of
+unobtrusive DHTML</a> that make a script easy to implement. Perhaps we
+can slightly improve upon it.</p>
+<h2>Image maps</h2>
+<p>Gina did hit upon the key point, though: marking out various bits 
+of an image has been possible in HTML for <em>ages</em>, using a
+client-side image map. We've moved away from them to a certain extent
+these days (well, the CSS-and-web-standards lobby have; they seem to be
+a mainstay of graphics-heavy commercial table-driven sites still), but
+they're specifically designed for this purpose. Just to refresh your
+memory (if such a refresher is needed), this is how an image map works:</p>
+<p>The image tag can take a <code>usemap</code> attribute, like so:</p>
+<pre><code>
+&lt;img src="myimg.png" alt="My image" <strong>usemap="#mapname"</strong>&gt;
+</code></pre>
+<p>The <code>usemap</code> attribute points to a map which 
+demarcates parts of the image:</p>
+<pre><code>
+&lt;map name="imgmap"&gt;
+  &lt;area alt="" title="Buffy mug" nohref="nohref"
+        shape="rect" coords="170,150,210,180"&gt;
+  &lt;area alt="" title="Crap books" nohref="nohref"
+        shape="rect" coords="170,10,320,80"&gt;
+&lt;/map&gt;
+</code></pre>
+<p>Note that the <code>name</code> of the <code>&lt;map&gt;</code> is the
+same name as that in the <code>usemap</code> attribute of the original
+<code>&lt;img&gt;</code>, except that the <code>usemap</code> takes a 
+preceding # symbol.</p>
+<p>Each <code>&lt;map&gt;</code> is composed of <code>area</code>s, which 
+have <code>coords</code> and a <code>shape</code>. While <code>shape</code>
+can be esoteric things like <code>circle</code> and <code>poly</code>, we'll
+concern ourselves only with rectangular <code>area</code>s here, which have
+a <code>shape</code> of <code>rect</code>. The <code>coords</code> attribute
+takes four numbers, comma-separated: <code>coords="l,t,r,b"</code>, where
+the four numbers are <strong>left</strong>, <strong>top</strong>,
+<strong>right</strong>, and <strong>bottom</strong>: pixel positions,
+measured relative to the top-left of the image. Note that this is
+<em>not</em> CSS: these are not in the CSS top-right-bottom-left order!
+There are plenty of resources out there on the web about setting up
+image maps, and indeed programs specifically to construct them given
+an image.</p>
+<p>So, what we want is to have those <code>area</code>s appear on an image
+when we mouse over it.</p>
+<p>Like this, in fact:</p>
+
+<p><img src="mydesk.jpg" usemap="#imgmap" class="annotated"></p>
+
+<h2>How do we use it</h2>
+<p>Much like all the other unobtrusive scripts, you don't need to
+do very much to make this happen. You <em>do</em> need to embed the
+<code>&lt;img&gt;</code> tag in your page as normal, and construct an
+image map and put that in the document too, as described above. Your 
+image should also have a class of <code>annotated</code>.</p>
+<p>Your <code>area</code>s <strong>must</strong> have a <code>title</code>
+attribute which is the tooltip that you want to appear when mousing
+over that area.</p>
+<p>Then, download the <a href="annimg.js">JavaScript library</a> and
+<a href="annimg.css">stylesheet</a> and include them in your page
+as normal:</p>
+<pre><code>
+&lt;script type="text/javascript" src="<a href="annimg.js">annimg.js</a>"&gt;&lt;/script&gt;
+&lt;link rel="stylesheet" href="<a href="annimg.css">annimg.css</a>"&gt;
+</code></pre>
+<p>and that's everything. All done.</p>
+
+<h2>Nicer titles</h2>
+Note that the tooltips that appear, associated with each area, are
+ordinary browser tooltips generated from the <code>title</code> element.
+While these are serviceable enough, you might want something a little
+cleverer. The DOM Annotated Images script integrates nicely with my
+<a href="http://www.kryogenix.org/code/browser/nicetitle/">nicetitles</a>:
+if the NiceTitles script is also included on the page (which it may
+already be, if you're already using them) then the tooltips for the
+image annotations will appear as NiceTitles.</p>
+
+<h3>Updates to the script</h3>
+<dl>
+  <dt>2004-11-16</dt>
+  <dd>Explicitly specify that the image must have class
+<code>annotated</code>. Thanks to Jeff Gates.</dd>
+  <dt>2004-11-09</dt>
+  <dd>Updated to take account of text size changes (or other alterations to 
+  the flow of the page) after initial load, so that the areas don't get 
+  offset. Thanks to Mac Steve.</dd>
+</dl>
+
+<p>Stuart Langridge, November 2004</p>
+
+<p><a href="/">kryogenix.org</a> | <a href="../">other browser
+experiments</a></p>
+
+<map name="imgmap">
+  <area alt="" title="Buffy mug" nohref="nohref"
+        shape="rect" coords="170,150,210,180">
+  <area alt="" title="Crap books" nohref="nohref"
+        shape="rect" coords="170,10,320,80">
+  <area alt="" title="Old computers (one runs Linux!)" nohref="nohref"
+        shape="rect" coords="220,210,330,330">
+  <area alt="" title="Obligatory cartoon" nohref="http://google.com"
+        shape="rect" coords="5,5,100,70">
+</map>
+</body>
+</html>

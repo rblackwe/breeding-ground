@@ -1,0 +1,18 @@
+#Action application/x-rdb-thing /usr/bin/perl
+#AddType application/x-rdb-thing .rdb
+
+#Action application/x-rdb-tap  /tests/action/proveit
+#AddType application/x-rdb-tap .t
+
+# Requests for files of a particular MIME content type:
+#Action image/gif /cgi-bin/images.cgi
+
+# Files of a particular file extension
+AddHandler prove-type .t
+Action prove-type /bin/proveit.cgi?v=1&file=
+
+#ErrorLog error.log
+#ErrorLog |/usr/local/bin/errorlog.pl
+#RewriteEngine on
+#RewriteBase /
+#RewriteRule (.*)\.htm$ /parser/parser.php?file=/$1.htm [PT,QSA]

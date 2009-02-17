@@ -1,0 +1,6 @@
+#!/bin/sh -ve
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+scp "$@" apt.socialtext.net:/home/apt/htdocs/binary
+ssh apt.socialtext.net 'cd ~apt/htdocs; ./update'

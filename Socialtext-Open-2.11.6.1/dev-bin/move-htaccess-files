@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+
+find /var/www/socialtext-1.0 -type f -name '.htaccess' -exec mv '{}' '{}.old' \;
+find /var/www/socialtext -type f -name '.htaccess' -exec mv '{}' '{}.old' \;

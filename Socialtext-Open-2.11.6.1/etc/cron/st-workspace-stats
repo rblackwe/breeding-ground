@@ -1,0 +1,2 @@
+# generate and mail workspace usage reports to each workspace and corp
+0 7 * * 0 root /usr/bin/nice /usr/local/bin/st-workspace-view-edit-stats < /var/log/apache-perl/access.log.1

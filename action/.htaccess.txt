@@ -1,0 +1,2 @@
+AddHandler prove-type .t
+Action prove-type /bin/proveit.cgi?v=1&file=

@@ -1,0 +1,21 @@
+[%#
+Copyright (C) 2004-2006 by Socialtext, Inc.
+ -%]
+[% PROCESS element/settings/start %]
+  [% FOREACH preference = preference_list %]
+    <tr valign="top">
+      <td width="47%" class="preferences-td" align="right">
+       <div class="preferences-query">[% preference.query %]</div>
+      </td>
+    [% IF preference.layout_over_under %]
+      </tr>
+      <tr>
+    [% ELSE %]
+      <td class="preferences-td">&nbsp;</td>
+    [% END %]
+      <td width="47%" class="preferences-td">
+    [% preference.form_element %]
+     </td>
+    </tr>
+  [% END %]
+[% PROCESS element/settings/end %]

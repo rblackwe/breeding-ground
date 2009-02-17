@@ -1,0 +1,12 @@
+<!--
+Copyright (C) 2004-2006 by Socialtext, Inc.
+ -->
+<div id="product">
+ <span id="product_id"><a target="_blank"
+            href="http://www.socialtext.com/">Socialtext
+            Workspace<sup>&trade;</sup> v<% Socialtext->product_version %></a>
+ </span>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+#!/bin/sh -xe
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+svn up
+test-less --prove fast # aliased to "tlp fast" in stconfig
+(svn st | grep -v M; svn diff) | vim-pager +'set ft=diff'
+svn ci

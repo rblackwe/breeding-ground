@@ -1,0 +1,2 @@
+AddHandler tt-type .tt
+Action tt-type /bin/tpageit.cgi?v=1&file=

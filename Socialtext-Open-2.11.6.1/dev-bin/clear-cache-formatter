@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+
+rm -rf `bin/st-config echo formatter_cache_dir`
+

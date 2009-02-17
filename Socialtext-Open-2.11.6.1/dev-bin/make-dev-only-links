@@ -1,0 +1,5 @@
+#!/bin/sh -xe
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+ln -fs ../../wikiwyg $(dirname $0)/../base/wikiwyg

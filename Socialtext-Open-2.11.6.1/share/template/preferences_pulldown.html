@@ -1,0 +1,8 @@
+[%#
+Copyright (C) 2004-2006 by Socialtext, Inc.
+ -%]
+<select name="[% name %]">
+  [% FOREACH value = values -%]
+    <option value="[% value %]"[% IF value == default %] selected="selected"[% END %]>[% labels.$value %]</option>
+  [% END -%]
+</select>

@@ -1,0 +1,15 @@
+#!/usr/bin/env perl
+#
+# Copyright (C) 2004-2006 by Socialtext, Inc.
+#
+
+use strict;
+use warnings;
+
+use FindBin;
+use lib "$FindBin::Bin/../lib";
+
+use Socialtext::File::Stringify;
+
+my $file = shift || die "Usage: $0 file\n";
+print Socialtext::File::Stringify->to_string($file);

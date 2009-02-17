@@ -1,0 +1,14 @@
+[%#
+Copyright (C) 2004-2006 by Socialtext, Inc.
+ -%]
+        [%- IF rows.size %]
+        <ul>
+        [%- FOREACH row = rows %]
+            <li>
+                <a title="[% row.Subject | html %]"
+                    href="/lite/page/[% workspace_name %]/[% row.page_uri %]">[% row.Subject |html %]</a>
+                - [% row.DateLocal %]
+            </li>
+        [% END -%]
+        </ul>
+        [% END -%]

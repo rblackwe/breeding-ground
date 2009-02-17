@@ -1,0 +1,19 @@
+#!/usr/local/bin/perl
+use CGI;
+
+my $q = new CGI;
+print $q->header;
+print $q->start_html('prove');
+
+my $file = $q->param('file');
+
+print $q->h1($file);
+
+my $command = "/usr/home/pl129/public_html/bin/prove /usr/home/pl129/public_html$file 2>&1";
+print "<hr>";
+
+my $out = `$command`;
+
+print "<pre>$out</pre>";
+
+print $q->end_html;               
